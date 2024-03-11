@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="mc_style.css">
+<div class="flex-container">
+  <button id="chooseButton" onclick="on()">ADD</button>
+  <button id="chooseButton" >CHANGE</button>
+  <button id="chooseButton" >PLAY</button>
+</div> 
+
+<div id="overlay" >
+  <button id="xButton" onclick="off()"> X </button>
+  <div class="flex-container-color">
+    <img id="colorButton" src="resources/pictures/red-mana.png" onclick="addMana('red')"></img>
+    <img id="colorButton" src="resources/pictures/blue-mana.png" onclick="addMana('blue')"></img>
+    <img id="colorButton" src="resources/pictures/green-mana.png" onclick="addMana('green')"></img>
+    <img id="colorButton" src="resources/pictures/white-mana.png" onclick="addMana('white')"></img>
+  </div> 
+  <div class="flex-container-color">
+    <img id="colorButton" src="resources/pictures/black-mana.png" onclick="addMana()"></img>
+    <img id="colorButton" src="resources/pictures/colorless-mana.png" style= "background-color: #cccccc;" onclick="addMana()"></img>
+    <img id="colorButton" src="resources/pictures/checkmark.png"></img>
+  </div> 
+  <div id="bottomRow"></div>
+</div>
+<script>
+  function on() {
+    document.getElementById("overlay").style.display = "block";
+  }
+
+  function off() {
+  document.getElementById("overlay").style.display = "none";
+} 
+  function addMana() {};
+</script>
+
+
+</html>
