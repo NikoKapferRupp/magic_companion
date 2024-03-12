@@ -6,6 +6,9 @@
   <button id="chooseButton" >CHANGE</button>
   <button id="chooseButton" >PLAY</button>
 </div> 
+<div class="flex-container-mana">
+
+</div>
 
 <div id="overlay" >
   <button id="xButton" onclick="closeOverlay()"> X </button>
@@ -24,7 +27,8 @@
 </div>
 
 <script>
-  const manaArray = [];
+  let manaArray = [['start', 1]];
+  let manaSum = 0;
   let currentMana = [];
     function on() {
       document.getElementById("overlay").style.display = "block";
@@ -60,18 +64,32 @@
       document.getElementById("bottomRow").remove();
       let currentManaString = currentMana.toString();
       
-      
-             
-        manaArray.push([currentManaString, 1])
-        
-      
-
-      
-      console.log(manaArray);      
-      
-      currentMana = [];
-      
+      if(manaArray[0][0].includes('start')) {
+        manaArray[0][0] = currentManaString;
+        manaArray[0][1] = 1;
+      } else {
+        let uniqueMana = true;
+        for (let arrayIterator = 0; arrayIterator < manaArray.length; arrayIterator += 1) {
+          if (manaArray[arrayIterator][0] === currentManaString) {
+              manaArray[arrayIterator][1] += 1;
+              uniqueMana = false;
+            break;
+          }
+        }
+        if (uniqueMana === true) {
+          manaArray.push([currentManaString, 1]);
+        }
+      }
+      manaArray.sort();
+      console.log(manaArray);  
+    currentMana = []; 
+    manaSum += 1;
+    updateMainScreen(); 
   }
+
+  function updateMainScreen() {
+    
+  } 
 </script>
 
 

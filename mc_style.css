@@ -133,3 +133,8 @@ body {
   flex-wrap: wrap;
   text-align: center;  
 }
+
+.flex-container-mana {
+  display: flex;
+  justify-content: center;
+}
