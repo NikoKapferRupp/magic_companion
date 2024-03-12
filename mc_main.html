@@ -24,8 +24,8 @@
 </div>
 
 <script>
-  
-  
+  const manaArray = [];
+  let currentMana = [];
     function on() {
       document.getElementById("overlay").style.display = "block";
       const manaOverlay = document.createElement("div");
@@ -40,10 +40,7 @@
     } 
 
     function addMana(color) {
-      if(!sessionStorage.getItem(color)) {
-          sessionStorage.setItem(color, 1)
-      }
-
+      
       const img = document.createElement("img");
       img.setAttribute("src","resources/pictures/"+color+"-mana.png");
       img.setAttribute("id", "colorButton");
@@ -54,17 +51,27 @@
         img.setAttribute("style", "background-color: black ;");
       }
       document.getElementById("bottomRow").appendChild(img);
-      console.log(sessionStorage)
+      currentMana.push(color);
+      currentMana.sort();
     };
 
-    function finishedOverlay() {
-      const bottomRow = document.getElementById("bottomRow");
-      
-      console.log(bottomRow.item[0]);
-
+  function finishedOverlay() {      
       document.getElementById("overlay").style.display = "none";
       document.getElementById("bottomRow").remove();
-    }
+      let currentManaString = currentMana.toString();
+      
+      
+             
+        manaArray.push([currentManaString, 1])
+        
+      
+
+      
+      console.log(manaArray);      
+      
+      currentMana = [];
+      
+  }
 </script>
 
 
