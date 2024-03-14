@@ -121,6 +121,10 @@ body {
   margin-top: 30px;   
 }
 
+#bottomDiv {
+  margin-top: 20px;
+}
+
 #checkButton {
   width:90px;
   height:90px;
@@ -150,7 +154,7 @@ body {
   border-style: solid;
   border-color: black;
   border-width: 3px; 
-  margin-top: 5px;  
+  margin-top: 60px;  
 }
 
 #secondResultMana {
@@ -160,7 +164,7 @@ body {
   border-style: solid;
   border-color: black;
   border-width: 3px;   
-  margin-top: 20px;
+  margin-top: 30px;
   position: absolute;
 }
 
@@ -171,7 +175,7 @@ body {
  border-style: solid;
  border-color: black;
  border-width: 3px;   
- margin-top: 40px;
+ 
  position: absolute;
 }
 
@@ -182,7 +186,7 @@ body {
   border-style: solid;
   border-color: black;
   border-width: 3px;   
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 
@@ -194,8 +198,6 @@ body {
   position: relative;
   background-size: 90px;
   background-repeat: no-repeat;
-  
-
 }
 
 #sumRow {
@@ -214,6 +216,5 @@ body {
   border-color: black;
   border-width: 3px;   
   margin-top: 40px;
-  
 }
 

@@ -136,7 +136,7 @@
         img.setAttribute("src","resources/pictures/"+colorArray[0]+"-mana.png");
         img.setAttribute("id", "resultMana");
         img.setAttribute("margin-top", "30px");
-        document.getElementById("tall-mana-box"+iterator).appendChild(img);
+        
         
         if(colorArray.length === 2) {
         
@@ -147,22 +147,19 @@
         } else {      
         const img1 = document.createElement("img");
         img1.setAttribute("src","resources/pictures/"+colorArray[1]+"-mana.png");
-        img1.setAttribute("id", "secondResultMana");
-        
-        
-        document.getElementById("tall-mana-box"+iterator).appendChild(img1); 
+        img1.setAttribute("id", "secondResultMana");      
 
         const img2 = document.createElement("img");
         img2.setAttribute("src","resources/pictures/"+colorArray[2]+"-mana.png");
-        img2.setAttribute("id", "thirdResultMana");       
-
+        img2.setAttribute("id", "thirdResultMana");
         document.getElementById("tall-mana-box"+iterator).appendChild(img2);
+        document.getElementById("tall-mana-box"+iterator).appendChild(img1);
         }
-        
+        document.getElementById("tall-mana-box"+iterator).appendChild(img);
       } else {
         const img = document.createElement("img");
         img.setAttribute("src","resources/pictures/"+manaArray[iterator][0]+"-mana.png");
-        img.setAttribute("id", "colorButton");
+        img.setAttribute("id", "resultMana");
         if (manaArray[iterator][0] === "all-colors") {
           img.setAttribute("style", "background-color: black ;");
         }
