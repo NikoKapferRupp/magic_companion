@@ -3,11 +3,12 @@
 <link rel="stylesheet" href="mc_style.css">
 <div class="flex-container">
   <button id="chooseButton" onclick="on()">ADD</button>
-  <button id="chooseButton" >CHANGE</button>
+  <button id="chooseButton" onclick="reset()">RESET</button>
   <button id="chooseButton" >PLAY</button>
 </div> 
-<div class="flex-container-mana">
-
+<div id="bottomDiv"></div>
+<div id="sumRow" style="visibility: hidden;">Sum: 
+  <img id="sumNum">
 </div>
 
 <div id="overlay" >
@@ -30,67 +31,182 @@
   let manaArray = [['start', 1]];
   let manaSum = 0;
   let currentMana = [];
-    function on() {
-      document.getElementById("overlay").style.display = "block";
-      const manaOverlay = document.createElement("div");
-      manaOverlay.setAttribute("class", "flex-container-bottom");
-      manaOverlay.setAttribute("id", "bottomRow");
-      document.getElementById("overlay").appendChild(manaOverlay);
-    }
 
-    function closeOverlay() {
-      document.getElementById("overlay").style.display = "none";
-      document.getElementById("bottomRow").remove();
-    } 
-
-    function addMana(color) {
+  function on() {
+    document.getElementById("overlay").style.display = "block";
+    const manaOverlay = document.createElement("div");
+    manaOverlay.setAttribute("class", "flex-container-bottom");
+    manaOverlay.setAttribute("id", "bottomRow");
+    document.getElementById("overlay").appendChild(manaOverlay);
+    try {
+      document.getElementById("resultRow").remove();
+    } catch (error) {
       
-      const img = document.createElement("img");
-      img.setAttribute("src","resources/pictures/"+color+"-mana.png");
-      img.setAttribute("id", "colorButton");
-      img.setAttribute("name", color);
-      if (color === "colorless") {
-        img.setAttribute("style", "background-color: #cccccc;");
-      } else if (color === "all-colors") {
-        img.setAttribute("style", "background-color: black ;");
-      }
-      document.getElementById("bottomRow").appendChild(img);
-      currentMana.push(color);
-      currentMana.sort();
-    };
+    }
+    document.getElementById("sumRow").setAttribute("style", "visibility: hidden");
+  }
+
+  function closeOverlay() {
+    currentMana = [];
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("bottomRow").remove();
+    updateMainScreen();
+    
+    
+  } 
+
+  function addMana(color) {
+    
+    const img = document.createElement("img");
+    img.setAttribute("src","resources/pictures/"+color+"-mana.png");
+    img.setAttribute("id", "colorButton");
+    img.setAttribute("name", color);
+    if (color === "all-colors") {
+      img.setAttribute("style", "background-color: black ;");
+    }
+    document.getElementById("bottomRow").appendChild(img);
+    currentMana.push(color);
+    currentMana.sort();
+  };
 
   function finishedOverlay() {      
-      document.getElementById("overlay").style.display = "none";
-      document.getElementById("bottomRow").remove();
-      let currentManaString = currentMana.toString();
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("bottomRow").remove();
+    let currentManaString = currentMana.toString();
       
-      if(manaArray[0][0].includes('start')) {
-        manaArray[0][0] = currentManaString;
-        manaArray[0][1] = 1;
-      } else {
-        let uniqueMana = true;
-        for (let arrayIterator = 0; arrayIterator < manaArray.length; arrayIterator += 1) {
-          if (manaArray[arrayIterator][0] === currentManaString) {
-              manaArray[arrayIterator][1] += 1;
-              uniqueMana = false;
-            break;
-          }
-        }
-        if (uniqueMana === true) {
-          manaArray.push([currentManaString, 1]);
+    if(manaArray[0][0].includes('start')) {
+      manaArray[0][0] = currentManaString;
+      manaArray[0][1] = 1;
+    } else {
+    let uniqueMana = true;
+    for (let arrayIterator = 0; arrayIterator < manaArray.length; arrayIterator += 1) {
+        if (manaArray[arrayIterator][0] === currentManaString) {
+            manaArray[arrayIterator][1] += 1;
+            uniqueMana = false;
+          break;
         }
       }
+        if (uniqueMana === true) {
+          manaArray.push([currentManaString, 1]);
+      }
+      }
       manaArray.sort();
-      console.log(manaArray);  
+      
     currentMana = []; 
     manaSum += 1;
+    multiColorSorter();
     updateMainScreen(); 
   }
 
+  function multiColorSorter() {
+    let singleMana = [];
+    let duoMana = [];
+    let tripleMana = [];
+
+    for(let iterator = 0; iterator < manaArray.length; iterator += 1) {
+      let colorArray = manaArray[iterator][0].replaceAll(",", " ").split(" ");
+      if(colorArray.length === 2) {
+        duoMana.push(manaArray[iterator]);
+      } else if (colorArray.length === 3) {
+        tripleMana.push(manaArray[iterator]);
+      } else {
+        singleMana.push(manaArray[iterator]);
+      }
+    }
+    manaArray = singleMana.concat(duoMana, tripleMana); 
+  }
+
   function updateMainScreen() {
+    const div = document.createElement("div");
+    div.setAttribute("class", "flex-container-mana");
+    div.setAttribute("id", "resultRow");
+    document.getElementById("bottomDiv").appendChild(div);
+
+    for(let iterator = 0; iterator < manaArray.length; iterator += 1) {
+      
+      const flexbox = document.createElement("div");
+      flexbox.setAttribute("class", "flex-container-solo-mana");
+      flexbox.setAttribute("id", "tall-mana-box"+iterator);
+      document.getElementById("resultRow").appendChild(flexbox);
+
+      if(manaArray[iterator][0].includes(",")) {
+        
+        let colorArray = manaArray[iterator][0].replaceAll(",", " ").split(" ");
+        const img = document.createElement("img");
+        img.setAttribute("src","resources/pictures/"+colorArray[0]+"-mana.png");
+        img.setAttribute("id", "resultMana");
+        img.setAttribute("margin-top", "30px");
+        document.getElementById("tall-mana-box"+iterator).appendChild(img);
+        
+        if(colorArray.length === 2) {
+        
+        const img1 = document.createElement("img");
+        img1.setAttribute("src","resources/pictures/"+colorArray[1]+"-mana.png");
+        img1.setAttribute("id", "secondResultMana");
+        document.getElementById("tall-mana-box"+iterator).appendChild(img1);
+        } else {      
+        const img1 = document.createElement("img");
+        img1.setAttribute("src","resources/pictures/"+colorArray[1]+"-mana.png");
+        img1.setAttribute("id", "secondResultMana");
+        
+        
+        document.getElementById("tall-mana-box"+iterator).appendChild(img1); 
+
+        const img2 = document.createElement("img");
+        img2.setAttribute("src","resources/pictures/"+colorArray[2]+"-mana.png");
+        img2.setAttribute("id", "thirdResultMana");       
+
+        document.getElementById("tall-mana-box"+iterator).appendChild(img2);
+        }
+        
+      } else {
+        const img = document.createElement("img");
+        img.setAttribute("src","resources/pictures/"+manaArray[iterator][0]+"-mana.png");
+        img.setAttribute("id", "colorButton");
+        if (manaArray[iterator][0] === "all-colors") {
+          img.setAttribute("style", "background-color: black ;");
+        }
+        document.getElementById("tall-mana-box"+iterator).appendChild(img);
+      }      
+      
+      const numImg = document.createElement("img");
+      numImg.setAttribute("src","resources/pictures/MTG_("+manaArray[iterator][1]+").svg.png");
+      numImg.setAttribute("id", "bottomNumber");
+      document.getElementById("tall-mana-box"+iterator).appendChild(numImg);      
+    } 
+    showSum();   
+  }
+  
+  function reset() {
+    manaArray = [['start', 1]];
+    currentMana = [];
+    try {
+        document.getElementById("resultRow").remove();
+      } catch (error) {
+      }
+    try {
+      document.getElementById("bottomRow").remove();
+    } catch (error) {
+    }
+    manaSum = 0;
+    document.getElementById("sumRow").setAttribute("style", "visibility: hidden");
     
-  } 
+  }
+
+  function showSum() {
+    document.getElementById("sumNum").setAttribute("src","resources/pictures/MTG_("+manaSum+").svg.png");
+    document.getElementById("sumNum").setAttribute("id", "sumNum");
+    document.getElementById("sumRow").setAttribute("style", "visibility: visible");
+  }
+  
+  function play() {
+        
+  }
+
+
 </script>
+
+
 
 
 </html>

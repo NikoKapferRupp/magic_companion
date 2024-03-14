@@ -27,7 +27,7 @@ body {
   background-repeat: no-repeat;
   background-color: #cccccc;
   background-position: center top;
-  background-size: 15em;
+  background-size: 40%;
   font-family: "Magic:the Gathering";
  }
 
@@ -55,12 +55,12 @@ body {
 .flex-container > button {
   background-color: #f1f1f1;
   margin: 30px;
-  padding: 60px;
+  padding: 50px;
   font-size: 40px;
   border-radius: 25px;
   text-align: center;
-  width: fit-content;
-
+  min-width: 250px;
+  margin-bottom: 10px;
   font-family: "Magic:the Gathering";
   box-shadow: 0 5px #666;
 }
@@ -68,6 +68,7 @@ body {
 .flex-container > button:active {
   box-shadow: 0 2px #666;
   transform: translateY(4px);
+  margin-top: 20px;
   
 }
 
@@ -111,17 +112,18 @@ body {
 }
 
 #colorButton {
-  width:100px;
-  height:100px;
+  width:90px;
+  height:90px;
   border-radius: 50%;
   border-style: solid;
   border-color: black;
-  border-width: 3px;    
+  border-width: 3px; 
+  margin-top: 30px;   
 }
 
 #checkButton {
-  width:100px;
-  height:100px;
+  width:90px;
+  height:90px;
   border-radius: 50%;
 }
 
@@ -137,4 +139,81 @@ body {
 .flex-container-mana {
   display: flex;
   justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
+
+#resultMana {
+  width:90px;
+  height:90px;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px; 
+  margin-top: 5px;  
+}
+
+#secondResultMana {
+   width:90px;
+  height:90px;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;   
+  margin-top: 20px;
+  position: absolute;
+}
+
+#thirdResultMana {
+  width:90px;
+ height:90px;
+ border-radius: 50%;
+ border-style: solid;
+ border-color: black;
+ border-width: 3px;   
+ margin-top: 40px;
+ position: absolute;
+}
+
+#bottomNumber {
+  width:90px;
+  height:90px;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;   
+  margin-top: 40px;
+}
+
+
+.flex-container-solo-mana {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
+  background-size: 90px;
+  background-repeat: no-repeat;
+  
+
+}
+
+#sumRow {
+  display: flex;
+  font-size: xx-large;
+  text-orientation: sideways;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+#sumNum {
+  width:90px;
+  height:90px;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;   
+  margin-top: 40px;
+  
+}
+
